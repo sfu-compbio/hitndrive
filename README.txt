@@ -1,3 +1,5 @@
+HIT'nDRIVE
+
 * HOW TO COMPILE HIT'nDRIVE
 
 In the "Makefile", set "CPLEXDIR" to the path of your root CPLEX folder. Set "CPLEX_BUILD" to the name of your build - the build can be identified from root folder in the following manner:
