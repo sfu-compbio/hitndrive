@@ -1,5 +1,5 @@
-CPLEXDIR=~inumanagic/software/cplex-12.5.1
-CPLEX_BUILD=x86-64_sles10_4.1
+CPLEXDIR=
+CPLEX_BUILD=
 
 CPLEXINC=$(CPLEXDIR)/cplex/include
 CPLEXLIB=$(CPLEXDIR)/cplex/lib/$(CPLEX_BUILD)/static_pic
