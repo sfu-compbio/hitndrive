@@ -9,8 +9,8 @@ CPLEXFLAGS=$(CPLEXLIB)/libilocplex.a $(CPLEXLIB)/libcplex.a $(CONCERTLIB)/libcon
 
 CC:=g++
 
-FLAGS=-O3 -static -std=gnu++0x -Iinclude -pthread
-FLAGSWITHCPLEX=-O3 -static -std=gnu++0x -DIL_STD -I$(CPLEXINC) -I$(CONCERTINC)
+FLAGS=-O3 -std=gnu++0x -Iinclude -pthread
+FLAGSWITHCPLEX=-O3 -std=gnu++0x -DIL_STD -I$(CPLEXINC) -I$(CONCERTINC)
 
 EXE1=buildGraph
 SRC1=buildGraph.cpp
