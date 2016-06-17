@@ -73,7 +73,7 @@ string sanitize( string x ) {
 
 int main ( int argc, char * argv[] ) {
 	if ( argc <= 1 ) {
-		fprintf( stdout, "Usage: ./generateILPMinMax_OutlierWeights -a [alterations file] -o [outlier file] -g [gene names file] -i [influence matrix] -f [output folder] -n [output filename] -l [alpha] -b [beta] -m [gamma]\n\n" );
+		fprintf( stdout, "Usage: ./hitndrive -a [alterations file] -o [outlier file] -g [gene names file] -i [influence matrix] -f [output folder] -n [output filename] -l [alpha] -b [beta] -m [gamma]\n\n" );
 		return 0;
 	}
 	
