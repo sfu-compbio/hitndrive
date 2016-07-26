@@ -24,7 +24,9 @@ workingFolder = "insertPath"
 network = "ppi network file path"
 
 ./buildGraph -i ${inputFolder}/${network} -f ${workingFolder} -o ppi
+
 ./getHTMatrixInversion -i ${workingFolder}/ppi.graph -o ppi -f ${workingFolder}
+
 ./hitndrive -a ${inputFolder}/alterations.txt -o ${inputFolder}/outliers.txt -g ${workingFolder}/ppi.nodes -i ${workingFolder}/ppi.ht -f ${workingFolder} -n hitndriveOutput -l 0.9 -b 0.4 -m 0.8
 ##########################################################################
 
