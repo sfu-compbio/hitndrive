@@ -20,7 +20,9 @@ Simply run "make" command in the src folder. It will create executables in the s
 
 ##########################################################################
 inputFolder = "insertPath"
+
 workingFolder = "insertPath"
+
 network = "ppi network file path"
 
 ./buildGraph -i ${inputFolder}/${network} -f ${workingFolder} -o ppi
