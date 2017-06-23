@@ -29,7 +29,7 @@ network = "ppi network file path"
 ```
 
 - The list of drivers will be in the `${workingFolder}/hitndriveOutput.drivers` file.
-- See individual executables' readme files if you need more details about how to run them.
+
 
 ### Step-1: `buildGraph`
 **Usage:**
