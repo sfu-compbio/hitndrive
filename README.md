@@ -90,9 +90,9 @@ The second is the path to file which contains node names listed in the order the
 | `-o` | output hitting times matrix file |
 | `-f` | output folder (optional) |
 
-`- i` : &nbsp;&nbsp; This file needs to be in same format as `.graph` output of `buildGraph` binary
-`- o` : &nbsp;&nbsp; Matrix-structured output file in which pair-wise hitting times are stored. The extension assigned is `.ht`. All rows and columns represent vertices of the graph. Vertex names are not included (no header row/column) as the nodes are represented in the same order as in the `.nodes` file.
-`- f` : &nbsp;&nbsp; Path to output folder the filename path is relative to. The default value is `.` (current folder).
+`- i` : &nbsp;&nbsp; This file needs to be in same format as `.graph` output of `buildGraph` binary  
+`- o` : &nbsp;&nbsp; Matrix-structured output file in which pair-wise hitting times are stored. The extension assigned is `.ht`. All rows and columns represent vertices of the graph. Vertex names are not included (no header row/column) as the nodes are represented in the same order as in the `.nodes` file.  
+`- f` : &nbsp;&nbsp; Path to output folder the filename path is relative to. The default value is `.` (current folder).  
 
 **Things To Note:**
 - The graph should be such that hitting times are calculable. If that is not the case, matrix inversion will fail due to singularity.
@@ -131,13 +131,13 @@ The second is the path to file which contains node names listed in the order the
 	...
 	ID_i Gene_j Weight_ij
 ```
-`- g` : &nbsp;&nbsp; File containing names of genes in the influence matrix. It is output of `buildGraph` binary
-`- i` : &nbsp;&nbsp; Output of `getHTMatrixInversion` binary
-`- f` : &nbsp;&nbsp; Path to output folder the filename path is relative to. The default value is `.`
-`- n` : &nbsp;&nbsp; Output filename for the `.lp` file. This file represents a CPLEX-format linear program whose solution gives influential driver genes given the input network, hitting-times, alteration and expression-outlier data.
-`- l` : &nbsp;&nbsp; Real number from interval `[0, 1]` representing fraction of expression-outliers to be covered in global. Tweak this number down if you are getting too many drivers and want to keep "problematic" expression-outliers aside.
-`- b` : &nbsp;&nbsp; Real number from interval `[0, 1]` representing fraction of top-weighted outliers to be covered per patient. This parameters ensures that the most important expression-outliers are explained by the chosen alteration events. Set to `0` if you wish all expression-outliers to be considered equally.
-`- m` : &nbsp;&nbsp; Real number from interval `[0, 1]` representing percentage of total incoming influence into an expression-outlier to be satisfied. This number is inversely proportional to the multi-hitting time distance from the selected set of drivers towards individual expression-outliers. Decrease this number to allow greater distances.
+`- g` : &nbsp;&nbsp; File containing names of genes in the influence matrix. It is output of `buildGraph` binary  
+`- i` : &nbsp;&nbsp; Output of `getHTMatrixInversion` binary  
+`- f` : &nbsp;&nbsp; Path to output folder the filename path is relative to. The default value is `.`  
+`- n` : &nbsp;&nbsp; Output filename for the `.lp` file. This file represents a CPLEX-format linear program whose solution gives influential driver genes given the input network, hitting-times, alteration and expression-outlier data.  
+`- l` : &nbsp;&nbsp; Real number from interval `[0, 1]` representing fraction of expression-outliers to be covered in global. Tweak this number down if you are getting too many drivers and want to keep "problematic" expression-outliers aside.  
+`- b` : &nbsp;&nbsp; Real number from interval `[0, 1]` representing fraction of top-weighted outliers to be covered per patient. This parameters ensures that the most important expression-outliers are explained by the chosen alteration events. Set to `0` if you wish all expression-outliers to be considered equally.  
+`- m` : &nbsp;&nbsp; Real number from interval `[0, 1]` representing percentage of total incoming influence into an expression-outlier to be satisfied. This number is inversely proportional to the multi-hitting time distance from the selected set of drivers towards individual expression-outliers. Decrease this number to allow greater distances.  
 
 **Things To Note:**
 - Alterations and expression-outliers files contain header rows, which are discarded during input. If your file does not contain a header, then first row of data will get ignored.
