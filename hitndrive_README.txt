@@ -1,6 +1,6 @@
 Usage: Usage: ./hitndrive -a [alterations file] -o [outlier file] -g [gene names file] -i [influence matrix] -f [output folder] -n [output filename] -l [alpha] -b [beta] -m [gamma]
 
--i [alterations file]
+-a [alterations file]
 	File containing list of sample IDs and names of the belonging aberrant genes. Format is following:
 
 	SampleID GeneName
