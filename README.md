@@ -10,12 +10,12 @@ References
 - Shrestha R, Hodzic E, Yeung J, Wang K, Sauerwald T, Dao P, Anderson S, Beltran H, Rubin MA, Collins CC, Haffari G and Sahinalp SC. 2014. HIT’nDRIVE: Multi-driver gene prioritization based on hitting time. Research in Computational Molecular Biology: 18th Annual International Conference, RECOMB 2014, Pittsburgh, PA, USA, April 2-5, 2014, 293–306. (https://link.springer.com/chapter/10.1007/978-3-319-05269-4_23)
 
 ### Setup
-#### SYSTEM REQUIREMENTS
+#### System Requirements
 - make (version 3.81 or higher)
 - g++ (GCC version 4.1.2 or higher)
 - IBM ILOG CPLEX Optimization Studio
 
-#### INSTALLATION
+#### Installation
 To install HIT'nDRIVE, clone the repo using following command
 ```sh
 git clone git@github.com:sfu-compbio/hitndrive.git
