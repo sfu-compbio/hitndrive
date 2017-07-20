@@ -1,6 +1,6 @@
 # HIT'nDRIVE
 
-HIT’nDRIVE (Shrestha et al. 2014; Shrestha et al. unpublished), is a combinatorial algorithm to prioritize cancer driver genes. It integrates changes in genome (sequence altered genes) with changes in transcriptome (gene expression outliers) to identify patient-specific genomic alterations that can collectively influence the dysregulated transcriptome of the patient. 
+HIT’nDRIVE (Shrestha et al. 2017), is a combinatorial algorithm to prioritize cancer driver genes. It integrates changes in genome (sequence altered genes) with changes in transcriptome (gene expression outliers) to identify patient-specific genomic alterations that can collectively influence the dysregulated transcriptome of the patient. 
 
 HIT’nDRIVE aims to solve the “random-walk facility location” (RWFL) problem on a gene/protein interaction network – thus differs from the standard facility location problem by its use of  “hitting time”, the expected minimum number of hops in a random-walk originating from any sequence altered gene (i.e. a potential driver) to reach an expression altered gene, as the distance measure. HIT’nDRIVE reduces RWFL (with multi-hitting time as the distance) to a weighted multi-set cover problem, which it solves as an integer linear program (ILP). 
 
