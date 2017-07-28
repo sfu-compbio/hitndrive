@@ -73,7 +73,7 @@ network = "ppi network file path"
 ```
 The second is the path to file which contains node names listed in the order they are discovered in the input file (`.nodes`). e.g.:
 ```sh
-    node_1
+    	node_1
 	node_2
 	...
 ```
