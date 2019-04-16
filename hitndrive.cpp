@@ -322,7 +322,7 @@ string sanitize( string x ) {
 int main ( int argc, char * argv[] ) {
 	// Processing console parameters
 	if ( argc <= 1 ) {
-		fprintf( stdout, "Usage: ./hitndrive -a [alterations file] -o [outlier file] -g [gene names file] -i [influence matrix] -f [output folder] -n [output filename] -l [alpha] -b [beta] -m [gamma]\n\n" );
+		fprintf( stdout, "Usage: ./hitndrive -a [alterations file] -o [outlier file] -g [gene names file] -i [influence matrix] -x [genes that are always picked] -f [output folder] -n [output filename] -l [alpha] -b [beta] -m [gamma]\n\n" );
 		return 0;
 	}
 	
@@ -470,6 +470,21 @@ int main ( int argc, char * argv[] ) {
 	{
 		buildBipartiteGraph( alterations, outliers, U, V );
 	}
+	unordered_set<string> pickThis;
+	{	// Genes that should always be picked
+		if (params.count('x')) {
+			sprintf( line, "Reading genes that should always be picked..." );
+			updateLine( line );
+			tPoint = clock();
+			ifstream fin( params[ 'x' ].c_str() );
+			string gene;
+			while (fin >> gene) {
+				pickThis.insert(gene);
+			}
+			strcat( line, " Done!" );
+			printLine( line );
+		}
+	}
 //	cout << "alterations:" << endl; for ( int i = 0; i < alterations.size(); i++ ) cout << alterations[ i ].sampleID << ' ' << alterations[ i ].gene << endl;
 //	cout << "\noutliers:" << endl; for ( int i = 0; i < outliers.size(); i++ ) cout << outliers[ i ].sampleID << ' ' << outliers[ i ].gene << endl;
 
@@ -584,6 +599,14 @@ int main ( int argc, char * argv[] ) {
 				e += Z[ i ];
 			}
 			model.add( e >= alpha * outliers.size() );
+		}
+
+		// (4) Genes that should always be picked - are picked!
+		if (!pickThis.empty()) {
+			for (int i = 0; i < xi.size(); i++) {
+				if (pickThis.count(xi[i]))
+					model.add(X[i] == 1);
+			}
 		}
 
 		printLine( ( string( "Generating ILP model... Done!" ) ).c_str() );
