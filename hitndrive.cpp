@@ -605,7 +605,7 @@ int main ( int argc, char * argv[] ) {
 		if (!pickThis.empty()) {
 			for (int i = 0; i < xi.size(); i++) {
 				if (pickThis.count(xi[i])) {
-					sprintf(stderr, "%s\t", xi[i].c_str());
+					fprintf(stderr, "%s\t", xi[i].c_str());
 					model.add(X[i] == 1);
 				}
 			}
