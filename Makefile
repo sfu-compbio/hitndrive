@@ -1,4 +1,4 @@
-CPLEXDIR=/path_to_cplex_rppt/cplex128/cplex
+CPLEXDIR=/path_to_cplex_root/cplex128/cplex
 SYSTEM=x86-64_linux
 LIBFORMAT=static_pic
 
