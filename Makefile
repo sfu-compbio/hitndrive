@@ -1,44 +1,40 @@
-CPLEXDIR=
-CPLEX_BUILD=
+CPLEXDIR=/path_to_cplex_rppt/cplex128/cplex
+SYSTEM=x86-64_linux
+LIBFORMAT=static_pic
 
-CPLEXINC=$(CPLEXDIR)/cplex/include
-CPLEXLIB=$(CPLEXDIR)/cplex/lib/$(CPLEX_BUILD)/static_pic
-CONCERTINC=$(CPLEXDIR)/concert/include
-CONCERTLIB=$(CPLEXDIR)/concert/lib/$(CPLEX_BUILD)/static_pic
-CPLEXFLAGS=$(CPLEXLIB)/libilocplex.a $(CPLEXLIB)/libcplex.a $(CONCERTLIB)/libconcert.a 
+CONCERTDIR= $(CPLEXDIR)/../concert
+CPLEXBINDIR=$(CPLEXDIR)/bin/$(SYSTEM)
+CPLEXLIBDIR=$(CPLEXDIR)/lib/$(SYSTEM)/$(LIBFORMAT)
+CONCERTLIBDIR=$(CONCERTDIR)/lib/$(SYSTEM)/$(LIBFORMAT)
 
-CC:=g++
+CCLNDIRS = -L$(CPLEXLIBDIR) -L$(CONCERTLIBDIR)
+CCLNFLAGS = -lconcert -lilocplex -lcplex -lm -lpthread -ldl
 
-FLAGS=-O3 -std=gnu++0x -Iinclude -pthread
-FLAGSWITHCPLEX=-O3 -std=gnu++0x -DIL_STD -I$(CPLEXINC) -I$(CONCERTINC)
+CONCERTINCDIR = $(CONCERTDIR)/include
+CPLEXINCDIR   = $(CPLEXDIR)/include
 
-EXE1=buildGraph
-SRC1=buildGraph.cpp
-OBJ1=buildGraph.o
+CCOPT = -m64 -O -fPIC -fno-strict-aliasing -fexceptions -DNDEBUG -DIL_STD
+CCC = g++ -std=gnu++0x -O4
+CCFLAGS = $(CCOPT) -I$(CPLEXINCDIR) -I$(CONCERTINCDIR)
 
-EXE2=getHTMatrixInversion
-SRC2=getHTMatrixInversion.cpp
-OBJ2=getHTMatrixInversion.o
+###################################
 
-EXE3=hitndrive
-SRC3=hitndrive.cpp
-OBJ3=hitndrive.o
+all: hitndrive getHTMatrixInversion buildGraph
 
-all: $(EXE1) $(EXE2) $(EXE3)
-	
+hitndrive: hitndrive.o
+        $(CCC) $(CCFLAGS) $(CCLNDIRS) -o $@ hitndrive.o $(CCLNFLAGS)
+hitndrive.o: hitndrive.cpp
+        $(CCC) -c $(CCFLAGS) hitndrive.cpp -o $@
 
-$(EXE1): $(OBJ1)
-	$(CC) $(OBJ1) $(FLAGS) -o $@
+getHTMatrixInversion: getHTMatrixInversion.o
+        $(CCC) $(CCOPT) -o $@ getHTMatrixInversion.o
+getHTMatrixInversion.o: getHTMatrixInversion.cpp
+        $(CCC) -c $(CCOPT) getHTMatrixInversion.cpp -o $@
 
-$(EXE2): $(OBJ2)
-	$(CC) $(OBJ2) $(FLAGS) -o $@
-
-$(EXE3): $(OBJ3)
-	$(CC) $(OBJ3) $(FLAGS) $(CPLEXFLAGS) -o $@
-
-.cpp.o:
-	$(CC) -c $(FLAGSWITHCPLEX) $^ -o $@
+buildGraph: buildGraph.o
+        $(CCC) $(CCOPT) -o $@ buildGraph.o
+buildGraph.o: buildGraph.cpp
+        $(CCC) -c $(CCOPT) buildGraph.cpp -o $@
 
 clean:
-	rm -f *.o $(EXE1) $(EXE2) $(EXE3)
-
+        rm -f *.o hitndrive getHTMatrixInversion buildGraph
