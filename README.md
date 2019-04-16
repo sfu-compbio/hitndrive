@@ -22,9 +22,9 @@ git clone git@github.com:sfu-compbio/hitndrive.git
 ```
 
 #### Compile HIT'nDRIVE
-In the `Makefile`, set `CPLEXDIR` to the path of your root CPLEX folder. Set `CPLEX_BUILD` to the name of your build - the build can be identified from root folder in the following manner:
+In the `Makefile`, set `CPLEXDIR` to point to `cplex` folder inside the root CPLEX folder. Set `SYSTEM` to the name of your build - the build can be identified from root folder in the following manner:
 ```sh
-${CPLEXDIR}/cplex/bin/${CPLEX_BUILD}/
+${CPLEXDIR}/bin/${SYSTEM}/
 ```
 Simply run `make` command in the `src` folder. It will create executables in the `src` folder.
 
