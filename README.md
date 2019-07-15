@@ -9,7 +9,9 @@ Publications
 - Shrestha R, Hodzic E, Sauerwald T, Dao P, Yeung J, Wang K, Anderson S, Haffari G, Collins CC, and Sahinalp SC. 2017. HIT’nDRIVE: Patient-Specific Multi-Driver Gene Prioritization for Precision Oncology. Genome Research. doi:10.1101/gr.221218.117 (http://dx.doi.org/10.1101/gr.221218.117)
 - Shrestha R, Hodzic E, Yeung J, Wang K, Sauerwald T, Dao P, Anderson S, Beltran H, Rubin MA, Collins CC, Haffari G and Sahinalp SC. 2014. HIT’nDRIVE: Multi-driver gene prioritization based on hitting time. Research in Computational Molecular Biology: 18th Annual International Conference, RECOMB 2014, Pittsburgh, PA, USA, April 2-5, 2014, 293–306. (https://link.springer.com/chapter/10.1007/978-3-319-05269-4_23)
 
-### Setup
+<br/><br/>
+
+# Setup
 #### System Requirements
 - make (version 3.81 or higher)
 - g++ (GCC version 4.1.2 or higher)
@@ -41,8 +43,10 @@ network = "ppi network file path"
 
 - The list of drivers will be in the `${workingFolder}/hitndriveOutput.drivers` file.
 
+<br/><br/>
 
-### Step-1: `buildGraph`
+# HIT'nDRIVE Function Description
+## Step-1: `buildGraph`
 **Usage:**
 ```sh
 ./buildGraph -i [input edge collection] -f [output folder] -o [output graph file name]
@@ -55,13 +59,16 @@ network = "ppi network file path"
 | `-f` | output folder (optional) |
 
 `- i` : &nbsp;&nbsp; This parameter represents an edge collection file where each row represents an edge in form of two vertex names followed by a weight, separated by whitespace. All edges are treated as undirected. There is no header row. e.g.
+
 ```sh
-	V1 V2 1
-	V5 V7 1
+	V1  V2  1
+	V5  V7  1
 	...
-	Vn Vk 1
+	Vn  Vk  1
 ```
+
 `- o` : &nbsp;&nbsp; This parameter determines the name and path of two output files (with exptensions `.graph` and `.nodes`). The first is the path to output file in which network information is stored as graph structure (`.graph`). First row contains number of vertices and directed edges. The following lines contain, for each vertex, the size of its neighbourhood followed by a pairs of numbers representing index of each neighbor and weight of the edge. e.g.
+
 ```sh
 	10971 428596
 	1 1 1
@@ -71,12 +78,14 @@ network = "ppi network file path"
 	113 5 1 
 	...
 ```
+
 The second is the path to file which contains node names listed in the order they are discovered in the input file (`.nodes`). e.g.:
 ```sh
     	node_1
 	node_2
 	...
 ```
+
 `- f` : &nbsp;&nbsp; Path to output folder the filename path is relative to. The default value is `.` (current folder).
 
 **Things To Note:**
@@ -84,9 +93,9 @@ The second is the path to file which contains node names listed in the order the
 - The output file does not contain any vertex labels, only their index in the .nodes file.
 - Both `.graph` and `.nodes` files are stored without headers to be used for hitting-time calculations.
 
+<br/><br/>
 
-
-### Step-2: `getHTMatrixInversion`
+## Step-2: `getHTMatrixInversion`
 - Inverts matrix `A` of size `n x n` and stores the result in `B`. It is based on gaussian elimination (elementary row transformations).
 - Returns `1` if the matrix is singular and no inverse exists. Otherwise it returns `0`.
 
@@ -109,7 +118,9 @@ The second is the path to file which contains node names listed in the order the
 - The graph should be such that hitting times are calculable. If that is not the case, matrix inversion will fail due to singularity.
 - It is okay if the graph has multiple connected components.
 
-### Step-3: `hitndrive`
+<br/><br/>
+
+## Step-3: `hitndrive`
 **Usage:**
 ```sh
 ./hitndrive -a [alterations file] -o [outlier file] -g [gene names file] -i [influence matrix] -f [output folder] -n [output filename] -l [alpha] -b [beta] -m [gamma]
@@ -129,19 +140,20 @@ The second is the path to file which contains node names listed in the order the
 
 `- a` : &nbsp;&nbsp; File containing list of sample IDs and name of the corresponding aberrant genes. Format is following:
 ```sh
-	SampleID GeneName
-	ID_1 Gene_1
-	...
-	ID_i Gene_j
-	...
+SampleID	GeneName
+ID_1		Gene_1
+...
+ID_i		Gene_j
+...
 ```
 `- o` : &nbsp;&nbsp; File containing list of sample IDs and names of the corresponding expression-outlier gene. Weights to the corresponding outlier gene should be in the third column. Set weights to `1` to obtain unweighted version. Format is following:
 ```sh
-	SampleID GeneName Weight
-	ID_1 Gene_1 Weight_1
-	...
-	ID_i Gene_j Weight_ij
+SampleID	GeneName	Weight
+ID_1		Gene_1		Weight_1
+...
+ID_i		Gene_j		Weight_ij
 ```
+
 `- g` : &nbsp;&nbsp; File containing names of genes in the influence matrix. It is output of `buildGraph` binary  
 `- i` : &nbsp;&nbsp; Output of `getHTMatrixInversion` binary  
 `- f` : &nbsp;&nbsp; Path to output folder the filename path is relative to. The default value is `.`  
@@ -153,3 +165,11 @@ The second is the path to file which contains node names listed in the order the
 **Things To Note:**
 - Alterations and expression-outliers files contain header rows, which are discarded during input. If your file does not contain a header, then first row of data will get ignored.
 - Running the program in unweighted mode and with `beta=0` (in case of uncertainty about importance of expression-outliers) will significantly increase the running time.
+
+<br/><br/>
+
+# HIT'nDRIVE using R
+
+R-wrapper function for this C++ implementation is also available under <https://github.com/raunakms/hitndriveCPPr>. These R functions are specifically designed to work with the *Slurm version 19.05* linux cluster architecture.
+
+More details on how to prepare input data for HIT'nDRIVE can be found under the [Data Preparation Guide](https://github.com/raunakms/hitndriveCPPr/wiki/Data-preparation-guide).
