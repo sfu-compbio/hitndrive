@@ -138,20 +138,20 @@ The second is the path to file which contains node names listed in the order the
 | `-b` | beta |
 | `-m` | gamma |
 
-`- a` : &nbsp;&nbsp; File containing list of sample IDs and name of the corresponding aberrant genes. Format is following:
+`- a` : &nbsp;&nbsp; File containing list of sample IDs and name of the corresponding aberrant genes. Format is following tab seperated file:
 ```sh
-SampleID	GeneName
-ID_1		Gene_1
+SampleID  GeneName
+ID_1	  Gene_1
 ...
-ID_i		Gene_j
+ID_i	  Gene_j
 ...
 ```
-`- o` : &nbsp;&nbsp; File containing list of sample IDs and names of the corresponding expression-outlier gene. Weights to the corresponding outlier gene should be in the third column. Set weights to `1` to obtain unweighted version. Format is following:
+`- o` : &nbsp;&nbsp; File containing list of sample IDs and names of the corresponding expression-outlier gene. Weights to the corresponding outlier gene should be in the third column. Set weights to `1` to obtain unweighted version. Format is following tab seperated file:
 ```sh
-SampleID	GeneName	Weight
-ID_1		Gene_1		Weight_1
+SampleID  GeneName  Weight
+ID_1	  Gene_1    Weight_1
 ...
-ID_i		Gene_j		Weight_ij
+ID_i	  Gene_j    Weight_ij
 ```
 
 `- g` : &nbsp;&nbsp; File containing names of genes in the influence matrix. It is output of `buildGraph` binary  
